@@ -6,7 +6,7 @@ import { StaggerGroup, StaggerItem } from "@/components/animations/StaggerGroup"
 
 export function Services() {
   return (
-    <section id="services" className="py-24 sm:py-32">
+    <section id="services" className="py-16 sm:py-20">
       <Container>
         <SectionHeading
           eyebrow="Services"
@@ -14,7 +14,7 @@ export function Services() {
           description="From a brand-new Shopify build to performance-critical fixes on an existing app, here's where I add the most value."
         />
 
-        <StaggerGroup className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <StaggerGroup className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SERVICES.map((service) => (
             <StaggerItem key={service.id}>
               <ServiceCard service={service} />

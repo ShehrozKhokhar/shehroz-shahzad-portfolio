@@ -38,7 +38,7 @@ export function Navbar() {
                 className={cn(
                   "group relative text-sm font-medium transition-colors",
                   activeId === link.sectionId
-                    ? "text-accent-cyan"
+                    ? "text-accent-green"
                     : "text-muted hover:text-foreground",
                 )}
               >
@@ -90,7 +90,7 @@ export function Navbar() {
                     className={cn(
                       "block rounded-lg px-3 py-3 text-sm font-medium transition-colors",
                       activeId === link.sectionId
-                        ? "text-accent-cyan"
+                        ? "text-accent-green"
                         : "text-muted hover:text-foreground",
                     )}
                   >

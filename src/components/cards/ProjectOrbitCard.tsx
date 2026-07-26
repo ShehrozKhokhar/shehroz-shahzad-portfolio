@@ -52,7 +52,7 @@ export function ProjectOrbitCard({
             : "translate-y-[calc(100%-3.75rem)] group-hover:translate-y-0 group-focus-visible:translate-y-0",
         )}
       >
-        <span className="text-xs font-semibold uppercase tracking-widest text-accent-cyan">
+        <span className="text-xs font-semibold uppercase tracking-widest text-accent-green">
           {project.category}
         </span>
         <h3 className="font-display text-lg font-semibold text-white">{project.title}</h3>

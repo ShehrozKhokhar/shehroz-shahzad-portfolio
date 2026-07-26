@@ -13,10 +13,10 @@ interface BaseProps {
 
 const variantClasses: Record<Variant, string> = {
   primary:
-    "bg-gradient-brand text-white shadow-lg shadow-accent-purple/20 hover:shadow-accent-purple/40 hover:-translate-y-0.5",
+    "bg-gradient-brand text-black shadow-lg shadow-accent-green/20 hover:shadow-accent-green/40 hover:-translate-y-0.5",
   secondary:
     "glass glass-hover text-foreground hover:-translate-y-0.5",
-  ghost: "text-foreground hover:text-accent-cyan",
+  ghost: "text-foreground hover:text-accent-green",
 };
 
 const baseClasses =

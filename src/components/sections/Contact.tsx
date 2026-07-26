@@ -9,7 +9,7 @@ import { SlideUp } from "@/components/animations/SlideUp";
 
 export function Contact() {
   return (
-    <section id="contact" className="py-24 sm:py-32">
+    <section id="contact" className="py-16 sm:py-20">
       <Container>
         <SectionHeading
           eyebrow="Contact"
@@ -17,7 +17,7 @@ export function Contact() {
           description="Tell me about your project and I'll get back to you within one business day."
         />
 
-        <div className="mt-16 grid grid-cols-1 gap-8 lg:grid-cols-5">
+        <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-5">
           <SlideUp className="lg:col-span-2">
             <GlassCard className="flex h-full flex-col gap-6">
               <div>
@@ -31,7 +31,7 @@ export function Contact() {
 
               <a
                 href={`mailto:${SITE_CONFIG.email}`}
-                className="inline-flex items-center gap-2 text-sm font-medium text-accent-cyan hover:underline"
+                className="inline-flex items-center gap-2 text-sm font-medium text-accent-green hover:underline"
               >
                 <Mail className="h-4 w-4" aria-hidden="true" />
                 {SITE_CONFIG.email}

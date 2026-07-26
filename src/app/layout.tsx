@@ -5,6 +5,7 @@ import { SITE_CONFIG } from "@/constants/site";
 import { PERSONAL, SOCIAL_LINKS } from "@/data/personal";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { ScrollProgress } from "@/components/layout/ScrollProgress";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -93,6 +94,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
         <MotionConfig reducedMotion="user">
+          <ScrollProgress />
           <Navbar />
           {children}
           <Footer />

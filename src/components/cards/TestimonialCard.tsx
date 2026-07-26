@@ -15,7 +15,7 @@ export function TestimonialCard({ testimonial }: TestimonialCardProps) {
             key={index}
             className={
               index < testimonial.rating
-                ? "h-4 w-4 fill-accent-cyan text-accent-cyan"
+                ? "h-4 w-4 fill-accent-green text-accent-green"
                 : "h-4 w-4 text-border"
             }
             aria-hidden="true"

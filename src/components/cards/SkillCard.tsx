@@ -11,7 +11,7 @@ export function SkillCard({ category }: SkillCardProps) {
     <GlassCard as="article" className="flex flex-col gap-5">
       <div className="flex items-center gap-3">
         <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-brand-soft">
-          <Icon className="h-5 w-5 text-accent-cyan" aria-hidden="true" />
+          <Icon className="h-5 w-5 text-accent-green" aria-hidden="true" />
         </div>
         <h3 className="font-display text-lg font-semibold text-foreground">
           {category.title}

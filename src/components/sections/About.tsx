@@ -8,7 +8,7 @@ import { StaggerGroup, StaggerItem } from "@/components/animations/StaggerGroup"
 
 export function About() {
   return (
-    <section id="about" className="py-24 sm:py-32">
+    <section id="about" className="py-16 sm:py-20">
       <Container>
         <SectionHeading
           eyebrow="About Me"
@@ -16,14 +16,14 @@ export function About() {
           description="A quick look at how I work and what I focus on."
         />
 
-        <div className="mt-16 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start">
+        <div className="mt-10 grid grid-cols-1 gap-12 lg:grid-cols-2 lg:items-start">
           <SlideUp className="flex flex-col gap-5">
             {PERSONAL.bio.map((paragraph) => (
               <p key={paragraph} className="text-base leading-relaxed text-muted sm:text-lg">
                 {paragraph}
               </p>
             ))}
-            <blockquote className="glass glow-border mt-2 rounded-xl border-l-2 border-l-accent-cyan p-5 text-sm italic text-foreground/90">
+            <blockquote className="glass glow-border mt-2 rounded-xl border-l-2 border-l-accent-green p-5 text-sm italic text-foreground/90">
               &ldquo;{PERSONAL.philosophy}&rdquo;
             </blockquote>
           </SlideUp>

@@ -15,7 +15,7 @@ import { ButtonEl } from "@/components/ui/Button";
 import { cn } from "@/utils/cn";
 
 const inputClasses =
-  "w-full rounded-xl border border-border bg-surface/60 px-4 py-3 text-sm text-foreground placeholder:text-muted/60 transition-colors focus:border-accent-cyan";
+  "w-full rounded-xl border border-border bg-surface/60 px-4 py-3 text-sm text-foreground placeholder:text-muted/60 transition-colors focus:border-accent-green";
 
 export function ContactForm() {
   const [status, setStatus] = useState<"idle" | "success" | "error">("idle");
@@ -121,7 +121,7 @@ export function ContactForm() {
 
       <div role="status" aria-live="polite">
         {status === "success" ? (
-          <p className="flex items-center gap-2 text-sm text-accent-cyan">
+          <p className="flex items-center gap-2 text-sm text-accent-green">
             <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
             Thanks — your message has been sent. I&apos;ll get back to you soon.
           </p>

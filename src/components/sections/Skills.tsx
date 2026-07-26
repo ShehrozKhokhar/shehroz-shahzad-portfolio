@@ -6,7 +6,7 @@ import { StaggerGroup, StaggerItem } from "@/components/animations/StaggerGroup"
 
 export function Skills() {
   return (
-    <section id="skills" className="py-24 sm:py-32">
+    <section id="skills" className="py-16 sm:py-20">
       <Container>
         <SectionHeading
           eyebrow="Skills"
@@ -14,7 +14,7 @@ export function Skills() {
           description="From Shopify Liquid to Next.js and performance tooling — the technologies I use to ship reliable, fast products."
         />
 
-        <StaggerGroup className="mt-16 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <StaggerGroup className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {SKILL_CATEGORIES.map((category) => (
             <StaggerItem key={category.id}>
               <SkillCard category={category} />

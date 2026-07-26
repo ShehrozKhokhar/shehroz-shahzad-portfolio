@@ -30,7 +30,7 @@ export function Projects() {
   });
 
   return (
-    <section id="projects" className="py-24 sm:py-32">
+    <section id="projects" className="py-16 sm:py-20">
       <Container>
         <SectionHeading
           eyebrow="Featured Projects"
@@ -39,7 +39,7 @@ export function Projects() {
         />
       </Container>
 
-      <div ref={trackRef} className="relative mt-12 hidden md:block" style={{ height: `${total * 60}vh` }}>
+      <div ref={trackRef} className="relative mt-8 hidden md:block" style={{ height: `${total * 32}vh` }}>
         <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
           <div
             className="relative"
@@ -74,7 +74,7 @@ export function Projects() {
                   key={project.id}
                   className={cn(
                     "h-2 w-2 rounded-full transition-all duration-300",
-                    index === activeIndex ? "w-6 bg-accent-cyan" : "bg-border",
+                    index === activeIndex ? "w-6 bg-accent-green" : "bg-border",
                   )}
                 />
               ))}

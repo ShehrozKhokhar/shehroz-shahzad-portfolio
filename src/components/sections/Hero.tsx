@@ -40,7 +40,7 @@ export function Hero() {
               variants={fadeInUp}
               className="font-display text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl"
             >
-              <span className="text-gradient">{PERSONAL.headline}</span>
+              <HighlightedHeadline text={PERSONAL.headline} highlight={PERSONAL.headlineHighlight} />
             </motion.h1>
 
             <motion.p variants={fadeInUp} className="max-w-xl text-base text-muted sm:text-lg">
@@ -88,9 +88,9 @@ function HeroGraphic() {
           <span className="ml-2 text-xs text-muted">theme.liquid</span>
         </div>
         <div className="mt-4 flex flex-col gap-2 font-mono text-xs sm:text-sm">
-          <CodeLine indent={0} tokens={[{ t: "export", c: "text-accent-purple" }, { t: " function ", c: "text-foreground" }, { t: "ProductCard", c: "text-accent-cyan" }, { t: "() {", c: "text-foreground" }]} />
-          <CodeLine indent={1} tokens={[{ t: "return", c: "text-accent-purple" }, { t: " (", c: "text-foreground" }]} />
-          <CodeLine indent={2} tokens={[{ t: "<Section", c: "text-accent-blue" }, { t: " optimised", c: "text-accent-cyan" }, { t: " />", c: "text-accent-blue" }]} />
+          <CodeLine indent={0} tokens={[{ t: "export", c: "text-accent-green" }, { t: " function ", c: "text-foreground" }, { t: "ProductCard", c: "text-accent-green-bright" }, { t: "() {", c: "text-foreground" }]} />
+          <CodeLine indent={1} tokens={[{ t: "return", c: "text-accent-green" }, { t: " (", c: "text-foreground" }]} />
+          <CodeLine indent={2} tokens={[{ t: "<Section", c: "text-accent-green-bright" }, { t: " optimised", c: "text-accent-green" }, { t: " />", c: "text-accent-green-bright" }]} />
           <CodeLine indent={1} tokens={[{ t: ")", c: "text-foreground" }]} />
           <CodeLine indent={0} tokens={[{ t: "}", c: "text-foreground" }]} />
           <div className="mt-3 flex items-center gap-2 rounded-lg bg-surface-2 px-3 py-2">
@@ -103,6 +103,22 @@ function HeroGraphic() {
         </div>
       </div>
     </div>
+  );
+}
+
+function HighlightedHeadline({ text, highlight }: { text: string; highlight: string }) {
+  const index = text.indexOf(highlight);
+  if (index === -1) return <>{text}</>;
+
+  const before = text.slice(0, index);
+  const after = text.slice(index + highlight.length);
+
+  return (
+    <>
+      {before}
+      <span className="text-gradient">{highlight}</span>
+      {after}
+    </>
   );
 }
 

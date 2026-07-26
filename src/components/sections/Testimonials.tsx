@@ -17,7 +17,7 @@ export function Testimonials() {
     setIndex((current) => (current - 1 + TESTIMONIALS.length) % TESTIMONIALS.length);
 
   return (
-    <section id="testimonials" className="py-24 sm:py-32">
+    <section id="testimonials" className="py-16 sm:py-20">
       <Container>
         <SectionHeading
           eyebrow="Testimonials"
@@ -25,13 +25,13 @@ export function Testimonials() {
           description="Feedback from the founders and teams I've worked with."
         />
 
-        <div className="mt-16 flex flex-col gap-6 sm:hidden">
+        <div className="mt-10 flex flex-col gap-6 sm:hidden">
           {TESTIMONIALS.map((testimonial) => (
             <TestimonialCard key={testimonial.id} testimonial={testimonial} />
           ))}
         </div>
 
-        <div className="mx-auto mt-16 hidden max-w-2xl sm:block">
+        <div className="mx-auto mt-10 hidden max-w-2xl sm:block">
           <div className="relative">
             <AnimatePresence mode="wait">
               <motion.div
@@ -67,7 +67,7 @@ export function Testimonials() {
                   onClick={() => setIndex(dotIndex)}
                   className={cn(
                     "h-2 w-2 rounded-full transition-all",
-                    dotIndex === index ? "w-6 bg-accent-cyan" : "bg-border",
+                    dotIndex === index ? "w-6 bg-accent-green" : "bg-border",
                   )}
                 />
               ))}
