@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Shehroz Shahzad — Portfolio
+
+Premium personal portfolio for a Shopify Developer & Full Stack Engineer. Built with Next.js 15 (App Router), TypeScript, Tailwind CSS v4, and Framer Motion.
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+npm install
+cp .env.example .env.local
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Environment Variables
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+See `.env.example`. The contact form requires:
 
-## Learn More
+- `RESEND_API_KEY` — from [resend.com](https://resend.com/api-keys). Without it, the form will render and validate, but submissions will fail with a clear error until a key is set.
+- `CONTACT_EMAIL_TO` — inbox that receives contact form submissions.
+- `NEXT_PUBLIC_SITE_URL` — production domain, used in metadata, the sitemap, and robots.txt.
 
-To learn more about Next.js, take a look at the following resources:
+## Replacing Placeholder Content
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+All editable copy lives in `src/data/*.ts` — no content is hardcoded into components:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `personal.ts` — name, bio, stats, social links
+- `skills.ts`, `services.ts` — skill categories and service offerings
+- `projects.ts`, `case-studies.ts` — project and case study write-ups
+- `testimonials.ts`, `experience.ts`, `process.ts`
 
-## Deploy on Vercel
+Everywhere a real screenshot or photo is expected, the site currently renders a `PlaceholderImage` (`src/components/ui/PlaceholderImage.tsx`) labelled with the expected filename. Once you have real assets, swap those usages for `next/image` with a real `src`.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Scripts
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run dev     # start dev server
+npm run build   # production build
+npm run start   # run the production build
+npm run lint     # eslint
+```
+
+## Notes
+
+- Full Lighthouse 95+/100 scores and the actual contact-form send are best verified against a deployed URL with a real `RESEND_API_KEY` set.
+- Individual case-study detail pages, a blog, and other future-scalability items are intentionally not built yet — see the project spec for the full list.
