@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef, useState } from "react";
+import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
 import { PROJECTS } from "@/data/projects";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
@@ -10,22 +9,30 @@ import { ProjectOrbitCard } from "@/components/cards/ProjectOrbitCard";
 import { cn } from "@/utils/cn";
 
 const TOTAL = PROJECTS.length;
-const CARD_WIDTH = 220;
-const CARD_HEIGHT = 320;
-const STEP = 230;
-
-function getOffset(index: number, active: number) {
-  let diff = index - active;
-  if (diff > TOTAL / 2) diff -= TOTAL;
-  if (diff < -TOTAL / 2) diff += TOTAL;
-  return diff;
-}
+// Duplicate each project so the wheel has enough panels to feel like a dense,
+// continuous circle (matching a denser reference carousel) instead of a sparse
+// 5-sided polygon where neighbours sit almost edge-on.
+const SLOTS = TOTAL * 2;
+const ANGLE_STEP = 360 / SLOTS;
+const CARD_WIDTH = 260;
+const CARD_HEIGHT = 380;
+const RADIUS = CARD_WIDTH / 2 / Math.tan(Math.PI / SLOTS) + 140;
 
 export function Projects() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const trackRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: trackRef,
+    offset: ["start start", "end end"],
+  });
+  // A half-turn (180deg) cycles through every unique project exactly once,
+  // since each project occupies two opposite slots on the wheel.
+  const rotateY = useTransform(scrollYProgress, [0, 1], [0, 180]);
 
-  const next = () => setActiveIndex((i) => (i + 1) % TOTAL);
-  const prev = () => setActiveIndex((i) => (i - 1 + TOTAL) % TOTAL);
+  const [activeIndex, setActiveIndex] = useState(0);
+  useMotionValueEvent(scrollYProgress, "change", (value) => {
+    const raw = Math.round(value * TOTAL);
+    setActiveIndex(((raw % TOTAL) + TOTAL) % TOTAL);
+  });
 
   return (
     <section id="projects" className="py-16 sm:py-20">
@@ -33,85 +40,58 @@ export function Projects() {
         <SectionHeading
           eyebrow="Featured Projects"
           title="Real Shopify stores, live in production"
-          description="A selection of ecommerce stores I've built and shipped on Shopify. Browse through them below, or swipe on mobile."
+          description="A selection of ecommerce stores I've built and shipped on Shopify. Scroll to rotate through them on desktop, or swipe through the list on mobile."
         />
       </Container>
 
-      <div className="relative mt-12 hidden h-[400px] items-center justify-center md:flex">
-        <button
-          type="button"
-          onClick={prev}
-          aria-label="Previous project"
-          className="glass glass-hover absolute left-4 z-30 rounded-full p-3 text-foreground sm:left-10"
-        >
-          <ChevronLeft className="h-5 w-5" aria-hidden="true" />
-        </button>
-        <button
-          type="button"
-          onClick={next}
-          aria-label="Next project"
-          className="glass glass-hover absolute right-4 z-30 rounded-full p-3 text-foreground sm:right-10"
-        >
-          <ChevronRight className="h-5 w-5" aria-hidden="true" />
-        </button>
-
-        <div className="relative h-full w-full overflow-hidden">
-          <div className="absolute inset-0" style={{ perspective: 1600 }}>
-            {PROJECTS.map((project, index) => {
-              const offset = getOffset(index, activeIndex);
-              const distance = Math.abs(offset);
-              const isActive = offset === 0;
-
-              if (distance > 1) return null;
-
-              return (
-                <motion.div
-                  key={project.id}
-                  className="absolute left-1/2 top-1/2"
-                  style={{ width: CARD_WIDTH, height: CARD_HEIGHT, zIndex: 10 - distance }}
-                  animate={{
-                    x: `calc(-50% + ${offset * STEP}px)`,
-                    y: "-50%",
-                    scale: isActive ? 1 : 0.8,
-                    opacity: isActive ? 1 : 0.45,
-                    rotateY: offset * -24,
-                  }}
-                  transition={{ type: "spring", stiffness: 260, damping: 30 }}
-                >
+      <div
+        ref={trackRef}
+        className="relative mt-10 hidden md:block"
+        style={{ height: `${TOTAL * 40}vh` }}
+      >
+        <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
+          <div
+            className="relative"
+            style={{ perspective: 1800, width: CARD_WIDTH, height: CARD_HEIGHT }}
+          >
+            <motion.div
+              className="absolute inset-0"
+              style={{ transformStyle: "preserve-3d", rotateY }}
+            >
+              {Array.from({ length: SLOTS }).map((_, slot) => {
+                const project = PROJECTS[slot % TOTAL];
+                return (
                   <div
-                    className={cn("h-full w-full", !isActive && "pointer-events-none")}
-                    onClick={() => !isActive && setActiveIndex(index)}
+                    key={slot}
+                    className="absolute inset-0"
+                    style={{
+                      transform: `rotateY(${slot * ANGLE_STEP}deg) translateZ(${RADIUS}px)`,
+                      backfaceVisibility: "hidden",
+                    }}
                   >
-                    <ProjectOrbitCard project={project} />
+                    <ProjectOrbitCard project={project} tabIndex={slot >= TOTAL ? -1 : undefined} />
                   </div>
-                </motion.div>
-              );
-            })}
+                );
+              })}
+            </motion.div>
           </div>
 
-          <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-24 bg-gradient-to-r from-background to-transparent" />
-          <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-24 bg-gradient-to-l from-background to-transparent" />
-        </div>
-      </div>
-
-      <div className="mt-8 hidden flex-col items-center gap-4 md:flex">
-        <p className="font-display text-lg font-semibold text-foreground">
-          {PROJECTS[activeIndex].title}
-        </p>
-        <div className="flex items-center gap-2">
-          {PROJECTS.map((project, index) => (
-            <button
-              key={project.id}
-              type="button"
-              onClick={() => setActiveIndex(index)}
-              aria-label={`Show ${project.title}`}
-              aria-current={index === activeIndex}
-              className={cn(
-                "h-2 w-2 rounded-full transition-all duration-300",
-                index === activeIndex ? "w-6 bg-accent-green" : "bg-border",
-              )}
-            />
-          ))}
+          <div className="mt-10 flex flex-col items-center gap-4">
+            <p className="font-display text-lg font-semibold text-foreground">
+              {PROJECTS[activeIndex].title}
+            </p>
+            <div className="flex items-center gap-2">
+              {PROJECTS.map((project, index) => (
+                <span
+                  key={project.id}
+                  className={cn(
+                    "h-2 w-2 rounded-full transition-all duration-300",
+                    index === activeIndex ? "w-6 bg-accent-green" : "bg-border",
+                  )}
+                />
+              ))}
+            </div>
+          </div>
         </div>
       </div>
 

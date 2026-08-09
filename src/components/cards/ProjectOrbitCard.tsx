@@ -8,18 +8,22 @@ interface ProjectOrbitCardProps {
   project: Project;
   alwaysExpanded?: boolean;
   className?: string;
+  tabIndex?: number;
 }
 
 export function ProjectOrbitCard({
   project,
   alwaysExpanded = false,
   className,
+  tabIndex,
 }: ProjectOrbitCardProps) {
   return (
     <a
       href={project.liveUrl}
       target="_blank"
       rel="noopener noreferrer"
+      tabIndex={tabIndex}
+      aria-hidden={tabIndex === -1 || undefined}
       style={{ backfaceVisibility: "hidden" }}
       className={cn(
         "group glass glow-border relative block h-full w-full overflow-hidden rounded-[28px]",
