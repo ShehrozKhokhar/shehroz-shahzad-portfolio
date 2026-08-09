@@ -5,10 +5,10 @@ import Link from "next/link";
 import { AnimatePresence, motion } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { NAV_LINKS } from "@/constants/navigation";
-import { PERSONAL } from "@/data/personal";
 import { useActiveSection } from "@/hooks/useActiveSection";
 import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { Button } from "@/components/ui/Button";
+import { Logo } from "@/components/ui/Logo";
 import { cn } from "@/utils/cn";
 
 export function Navbar() {
@@ -26,8 +26,8 @@ export function Navbar() {
           isScrolled && "shadow-2xl",
         )}
       >
-        <Link href="#home" className="font-display text-lg font-semibold text-foreground">
-          {PERSONAL.name}
+        <Link href="#home">
+          <Logo className="text-lg" />
         </Link>
 
         <ul className="hidden items-center gap-8 md:flex">

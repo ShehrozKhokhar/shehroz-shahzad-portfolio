@@ -3,6 +3,7 @@ import { NAV_LINKS } from "@/constants/navigation";
 import { SERVICES } from "@/data/services";
 import { SOCIAL_LINKS, PERSONAL } from "@/data/personal";
 import { Container } from "@/components/ui/Container";
+import { Logo } from "@/components/ui/Logo";
 import { BackToTopButton } from "./BackToTopButton";
 
 export function Footer() {
@@ -12,7 +13,7 @@ export function Footer() {
     <footer className="relative border-t border-border bg-surface">
       <Container className="grid grid-cols-1 gap-10 py-16 sm:grid-cols-2 lg:grid-cols-4">
         <div>
-          <p className="font-display text-lg font-semibold text-foreground">{PERSONAL.name}</p>
+          <Logo className="text-lg" />
           <p className="mt-3 max-w-xs text-sm text-muted">{PERSONAL.subheadline}</p>
         </div>
 
