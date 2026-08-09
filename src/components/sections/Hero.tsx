@@ -7,6 +7,8 @@ import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { FloatingParticles } from "@/components/animations/FloatingParticles";
+import { Hero3DBackground } from "@/components/animations/Hero3DBackground";
+import { TypewriterWords } from "@/components/animations/TypewriterWords";
 import { staggerContainer, fadeInUp } from "@/constants/animations";
 
 export function Hero() {
@@ -16,6 +18,7 @@ export function Hero() {
       className="relative flex min-h-screen items-center overflow-hidden pt-28 pb-16"
     >
       <div className="bg-gradient-glow absolute inset-0" aria-hidden="true" />
+      <Hero3DBackground />
       <FloatingParticles />
 
       <Container className="relative z-10">
@@ -38,9 +41,11 @@ export function Hero() {
 
             <motion.h1
               variants={fadeInUp}
-              className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl"
+              className="font-display text-3xl font-bold leading-[1.15] tracking-tight text-foreground sm:text-4xl lg:text-5xl"
             >
-              <HighlightedHeadline text={PERSONAL.headline} highlight={PERSONAL.headlineHighlight} />
+              {PERSONAL.headlinePrefix}
+              <br />
+              <TypewriterWords words={[...PERSONAL.headlineWords]} />
             </motion.h1>
 
             <motion.p variants={fadeInUp} className="max-w-lg text-lg text-muted">
@@ -97,22 +102,6 @@ function HeroGraphic() {
         </div>
       </div>
     </div>
-  );
-}
-
-function HighlightedHeadline({ text, highlight }: { text: string; highlight: string }) {
-  const index = text.indexOf(highlight);
-  if (index === -1) return <>{text}</>;
-
-  const before = text.slice(0, index);
-  const after = text.slice(index + highlight.length);
-
-  return (
-    <>
-      {before}
-      <span className="text-gradient">{highlight}</span>
-      {after}
-    </>
   );
 }
 

@@ -6,8 +6,8 @@ import type { SocialLink, Stat } from "@/types";
 export const PERSONAL = {
   name: "Shehroz Shahzad",
   role: "Shopify Developer & Full Stack Engineer",
-  headline: "Building High-Performance Shopify Stores & Modern Web Applications",
-  headlineHighlight: "Shopify Stores",
+  headlinePrefix: "Building high-performance",
+  headlineWords: ["Shopify stores", "Next.js web apps", "digital experiences"],
   subheadline:
     "Shopify Developer specialising in custom themes, Shopify Functions, app integrations, performance optimisation, and modern web development using Next.js and TypeScript.",
   bio: [
