@@ -55,15 +55,6 @@ export interface Project {
   image: string | null;
 }
 
-export interface ExperienceItem {
-  id: string;
-  title: string;
-  organization: string;
-  period: string;
-  description: string;
-  icon: IconComponent;
-}
-
 export interface ProcessStep {
   id: string;
   step: number;

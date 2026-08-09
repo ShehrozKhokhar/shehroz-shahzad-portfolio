@@ -1,33 +1,30 @@
 "use client";
 
-import { useRef, useState } from "react";
-import { motion, useMotionValueEvent, useScroll, useTransform } from "framer-motion";
+import { useState } from "react";
+import { motion } from "framer-motion";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { PROJECTS } from "@/data/projects";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { ProjectOrbitCard } from "@/components/cards/ProjectOrbitCard";
 import { cn } from "@/utils/cn";
 
-const CARD_WIDTH = 240;
-const CARD_HEIGHT = 340;
-const RADIUS = 360;
+const TOTAL = PROJECTS.length;
+const CARD_WIDTH = 220;
+const CARD_HEIGHT = 320;
+
+function getOffset(index: number, active: number) {
+  let diff = index - active;
+  if (diff > TOTAL / 2) diff -= TOTAL;
+  if (diff < -TOTAL / 2) diff += TOTAL;
+  return diff;
+}
 
 export function Projects() {
-  const total = PROJECTS.length;
-  const angleStep = 360 / total;
-
-  const trackRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: trackRef,
-    offset: ["start start", "end end"],
-  });
-  const rotateY = useTransform(scrollYProgress, [0, 1], [0, 360]);
-
   const [activeIndex, setActiveIndex] = useState(0);
-  useMotionValueEvent(scrollYProgress, "change", (value) => {
-    const raw = Math.round((value * 360) / angleStep);
-    setActiveIndex(((raw % total) + total) % total);
-  });
+
+  const next = () => setActiveIndex((i) => (i + 1) % TOTAL);
+  const prev = () => setActiveIndex((i) => (i - 1 + TOTAL) % TOTAL);
 
   return (
     <section id="projects" className="py-16 sm:py-20">
@@ -35,68 +32,83 @@ export function Projects() {
         <SectionHeading
           eyebrow="Featured Projects"
           title="Real Shopify stores, live in production"
-          description="A selection of ecommerce stores I've built and shipped on Shopify. Scroll to rotate through them on desktop, or swipe through the list on mobile."
+          description="A selection of ecommerce stores I've built and shipped on Shopify. Browse through them below, or swipe on mobile."
         />
       </Container>
 
-      <div className="mt-10 overflow-hidden border-y border-border py-3" aria-hidden="true">
-        <div className="animate-marquee flex w-max items-center gap-10 [animation-duration:24s]">
-          {Array.from({ length: 8 }).map((_, i) => (
-            <span
-              key={i}
-              className="flex items-center gap-10 font-display text-2xl font-semibold uppercase tracking-wide text-transparent sm:text-3xl"
-              style={{ WebkitTextStroke: "1px var(--color-border)" }}
-            >
-              Featured Projects
-              <span className="text-accent-green" style={{ WebkitTextStroke: "0" }}>
-                ✦
-              </span>
-            </span>
-          ))}
-        </div>
-      </div>
+      <div className="relative mt-12 hidden h-[420px] items-center justify-center md:flex">
+        <button
+          type="button"
+          onClick={prev}
+          aria-label="Previous project"
+          className="glass glass-hover absolute left-4 z-20 rounded-full p-3 text-foreground sm:left-10"
+        >
+          <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+        </button>
+        <button
+          type="button"
+          onClick={next}
+          aria-label="Next project"
+          className="glass glass-hover absolute right-4 z-20 rounded-full p-3 text-foreground sm:right-10"
+        >
+          <ChevronRight className="h-5 w-5" aria-hidden="true" />
+        </button>
 
-      <div ref={trackRef} className="relative mt-8 hidden md:block" style={{ height: `${total * 32}vh` }}>
-        <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
-          <div
-            className="relative"
-            style={{ perspective: 1400, width: CARD_WIDTH, height: CARD_HEIGHT }}
-          >
-            <motion.div
-              className="absolute inset-0"
-              style={{ transformStyle: "preserve-3d", rotateY }}
-            >
-              {PROJECTS.map((project, index) => (
+        <div
+          className="relative h-full w-full overflow-hidden"
+          style={{ perspective: 1600 }}
+        >
+          {PROJECTS.map((project, index) => {
+            const offset = getOffset(index, activeIndex);
+            const distance = Math.abs(offset);
+            const isActive = offset === 0;
+
+            if (distance > 2) return null;
+
+            return (
+              <motion.div
+                key={project.id}
+                className="absolute left-1/2 top-1/2"
+                style={{ width: CARD_WIDTH, height: CARD_HEIGHT, zIndex: 10 - distance }}
+                animate={{
+                  x: `calc(-50% + ${offset * 200}px)`,
+                  y: "-50%",
+                  scale: isActive ? 1 : distance === 1 ? 0.82 : 0.64,
+                  opacity: isActive ? 1 : distance === 1 ? 0.55 : 0.22,
+                  rotateY: offset * -22,
+                }}
+                transition={{ type: "spring", stiffness: 260, damping: 30 }}
+              >
                 <div
-                  key={project.id}
-                  className="absolute inset-0"
-                  style={{
-                    transform: `rotateY(${index * angleStep}deg) translateZ(${RADIUS}px)`,
-                    backfaceVisibility: "hidden",
-                  }}
+                  className={cn(!isActive && "pointer-events-none")}
+                  onClick={() => !isActive && setActiveIndex(index)}
                 >
                   <ProjectOrbitCard project={project} />
                 </div>
-              ))}
-            </motion.div>
-          </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
 
-          <div className="mt-8 flex flex-col items-center gap-4">
-            <p className="font-display text-lg font-semibold text-foreground">
-              {PROJECTS[activeIndex].title}
-            </p>
-            <div className="flex items-center gap-2">
-              {PROJECTS.map((project, index) => (
-                <span
-                  key={project.id}
-                  className={cn(
-                    "h-2 w-2 rounded-full transition-all duration-300",
-                    index === activeIndex ? "w-6 bg-accent-green" : "bg-border",
-                  )}
-                />
-              ))}
-            </div>
-          </div>
+      <div className="mt-8 hidden flex-col items-center gap-4 md:flex">
+        <p className="font-display text-lg font-semibold text-foreground">
+          {PROJECTS[activeIndex].title}
+        </p>
+        <div className="flex items-center gap-2">
+          {PROJECTS.map((project, index) => (
+            <button
+              key={project.id}
+              type="button"
+              onClick={() => setActiveIndex(index)}
+              aria-label={`Show ${project.title}`}
+              aria-current={index === activeIndex}
+              className={cn(
+                "h-2 w-2 rounded-full transition-all duration-300",
+                index === activeIndex ? "w-6 bg-accent-green" : "bg-border",
+              )}
+            />
+          ))}
         </div>
       </div>
 
