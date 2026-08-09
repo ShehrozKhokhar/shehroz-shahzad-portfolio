@@ -1,4 +1,5 @@
 import { Hero } from "@/components/sections/Hero";
+import { TechStackMarquee } from "@/components/sections/TechStackMarquee";
 import { LogoMarquee } from "@/components/sections/LogoMarquee";
 import { About } from "@/components/sections/About";
 import { Skills } from "@/components/sections/Skills";
@@ -14,6 +15,7 @@ export default function Home() {
   return (
     <main className="flex-1">
       <Hero />
+      <TechStackMarquee />
       <LogoMarquee />
       <About />
       <Skills />
