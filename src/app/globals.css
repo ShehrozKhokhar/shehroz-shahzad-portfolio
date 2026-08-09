@@ -1,18 +1,18 @@
 @import "tailwindcss";
 
 :root {
-  --background: #030402;
-  --foreground: #f4f5f7;
+  --background: #000000;
+  --foreground: #f5f5f7;
 
-  --color-surface: #0a0d0a;
-  --color-surface-2: #0f130f;
-  --color-border: rgba(255, 255, 255, 0.08);
+  --color-surface: #0a0a0a;
+  --color-surface-2: #101010;
+  --color-border: rgba(255, 255, 255, 0.1);
 
-  --color-accent-green: #34d399;
+  --color-accent-green: #30d987;
   --color-accent-green-bright: #7cf5b0;
   --color-accent-green-deep: #0f9d63;
 
-  --color-muted: #9ca3af;
+  --color-muted: #98989d;
 }
 
 @theme inline {
@@ -27,7 +27,7 @@
   --color-muted: var(--color-muted);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --font-display: var(--font-space-grotesk);
+  --font-display: var(--font-geist-sans);
 }
 
 * {
@@ -56,119 +56,84 @@ body {
 }
 
 @layer utilities {
-  .text-gradient {
-    background-image: linear-gradient(
-      90deg,
-      var(--color-accent-green-bright),
-      var(--color-accent-green),
-      var(--color-accent-green-deep),
-      var(--color-accent-green),
-      var(--color-accent-green-bright)
-    );
-    background-size: 200% auto;
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    animation: gradient-shift 10s linear infinite;
-  }
-
-  @keyframes gradient-shift {
-    to {
-      background-position: -200% center;
-    }
-  }
-
-  .bg-gradient-brand {
-    background-image: linear-gradient(
-      90deg,
-      var(--color-accent-green-bright),
-      var(--color-accent-green),
-      var(--color-accent-green-deep)
-    );
-  }
-
-  .bg-gradient-brand-soft {
-    background-image: linear-gradient(
-      135deg,
-      rgba(124, 245, 176, 0.18),
-      rgba(52, 211, 153, 0.18),
-      rgba(15, 157, 99, 0.18)
-    );
-  }
-
-  .bg-gradient-brand-faint {
-    background-image: linear-gradient(
-      135deg,
-      rgba(124, 245, 176, 0.1),
-      rgba(52, 211, 153, 0.1),
-      rgba(15, 157, 99, 0.1)
-    );
-  }
-
-  .bg-gradient-glow {
-    background-image: radial-gradient(
-        55% 55% at 20% 15%,
-        rgba(52, 211, 153, 0.2),
-        transparent 60%
-      ),
-      radial-gradient(
-        50% 50% at 80% 25%,
-        rgba(15, 157, 99, 0.18),
-        transparent 60%
-      ),
-      radial-gradient(
-        55% 55% at 50% 95%,
-        rgba(124, 245, 176, 0.12),
-        transparent 60%
-      );
-  }
-
+  /* Liquid Glass: translucent, saturating material with a soft specular
+     highlight along the top edge, like light catching real glass. */
   .glass {
-    background: rgba(255, 255, 255, 0.04);
+    position: relative;
+    background: rgba(255, 255, 255, 0.055);
     border: 1px solid var(--color-border);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.22),
+      0 12px 40px -12px rgba(0, 0, 0, 0.5);
   }
 
   .glass-hover {
-    transition: border-color 0.3s ease, background-color 0.3s ease, transform 0.3s ease;
+    transition: background-color 0.35s ease, border-color 0.35s ease, transform 0.35s ease;
   }
 
   .glass-hover:hover {
-    background: rgba(255, 255, 255, 0.07);
-    border-color: rgba(255, 255, 255, 0.16);
+    background: rgba(255, 255, 255, 0.09);
+    border-color: rgba(255, 255, 255, 0.18);
   }
 
-  .glow-border {
+  /* Tinted glass — same material, faint accent tint for primary actions. */
+  .glass-tint {
     position: relative;
+    background: rgba(48, 217, 135, 0.16);
+    border: 1px solid rgba(48, 217, 135, 0.32);
+    backdrop-filter: blur(28px) saturate(160%);
+    -webkit-backdrop-filter: blur(28px) saturate(160%);
+    box-shadow:
+      inset 0 1px 0 0 rgba(255, 255, 255, 0.3),
+      0 12px 30px -10px rgba(48, 217, 135, 0.25);
   }
 
+  .glass-tint:hover {
+    background: rgba(48, 217, 135, 0.24);
+  }
+
+  /* Subtle brightening rim on hover, replacing a colorful glow. */
   .glow-border::before {
     content: "";
     position: absolute;
-    inset: -1px;
+    inset: 0;
     border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-      120deg,
-      var(--color-accent-green-bright),
-      var(--color-accent-green),
-      var(--color-accent-green-deep)
-    );
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0);
+    transition: box-shadow 0.35s ease;
     pointer-events: none;
   }
 
   .glow-border:hover::before {
-    opacity: 1;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.22);
   }
-}
 
-@layer utilities {
+  .text-gradient {
+    color: var(--color-accent-green);
+  }
+
+  .bg-gradient-brand {
+    background: var(--color-accent-green);
+  }
+
+  .bg-gradient-brand-soft {
+    background: rgba(48, 217, 135, 0.14);
+  }
+
+  .bg-gradient-brand-faint {
+    background: rgba(48, 217, 135, 0.08);
+  }
+
+  .bg-gradient-glow {
+    background-image: radial-gradient(
+        50% 50% at 22% 18%,
+        rgba(48, 217, 135, 0.14),
+        transparent 60%
+      ),
+      radial-gradient(45% 45% at 82% 30%, rgba(255, 255, 255, 0.05), transparent 60%);
+  }
+
   @keyframes marquee {
     from {
       transform: translateX(0);
@@ -179,22 +144,7 @@ body {
   }
 
   .animate-marquee {
-    animation: marquee 28s linear infinite;
-  }
-
-  @keyframes blink {
-    0%,
-    50% {
-      opacity: 1;
-    }
-    51%,
-    100% {
-      opacity: 0;
-    }
-  }
-
-  .typewriter-cursor {
-    animation: blink 1s step-end infinite;
+    animation: marquee 32s linear infinite;
   }
 
   .faq-item > summary {

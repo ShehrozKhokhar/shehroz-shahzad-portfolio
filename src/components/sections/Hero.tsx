@@ -1,21 +1,13 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { PERSONAL } from "@/data/personal";
-import { TESTIMONIALS } from "@/data/testimonials";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { FloatingParticles } from "@/components/animations/FloatingParticles";
-import { TypewriterWords } from "@/components/animations/TypewriterWords";
 import { staggerContainer, fadeInUp } from "@/constants/animations";
-
-const BUILDING_WORDS = ["Shopify stores", "Next.js apps", "landing pages", "checkout flows"];
-
-const AVERAGE_RATING = (
-  TESTIMONIALS.reduce((sum, testimonial) => sum + testimonial.rating, 0) / TESTIMONIALS.length
-).toFixed(1);
 
 export function Hero() {
   return (
@@ -33,7 +25,7 @@ export function Hero() {
           variants={staggerContainer}
           className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2"
         >
-          <div className="flex flex-col gap-6">
+          <div className="flex flex-col gap-7">
             <motion.div variants={fadeInUp}>
               <Badge className="gap-2">
                 <span className="relative flex h-2 w-2" aria-hidden="true">
@@ -44,15 +36,6 @@ export function Hero() {
               </Badge>
             </motion.div>
 
-            <motion.p
-              variants={fadeInUp}
-              className="font-mono text-sm text-muted"
-              aria-hidden="true"
-            >
-              <span className="text-accent-green">$</span> currently building:{" "}
-              <TypewriterWords words={BUILDING_WORDS} className="text-accent-green-bright" />
-            </motion.p>
-
             <motion.h1
               variants={fadeInUp}
               className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl"
@@ -60,7 +43,7 @@ export function Hero() {
               <HighlightedHeadline text={PERSONAL.headline} highlight={PERSONAL.headlineHighlight} />
             </motion.h1>
 
-            <motion.p variants={fadeInUp} className="max-w-xl text-base text-muted sm:text-lg">
+            <motion.p variants={fadeInUp} className="max-w-lg text-lg text-muted">
               {PERSONAL.subheadline}
             </motion.p>
 
@@ -72,34 +55,6 @@ export function Hero() {
               <Button href="#projects" variant="secondary">
                 View My Work
               </Button>
-            </motion.div>
-
-            <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-4 pt-2">
-              <div className="flex -space-x-2.5" aria-hidden="true">
-                {TESTIMONIALS.slice(0, 4).map((testimonial) => (
-                  <div
-                    key={testimonial.id}
-                    className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-background bg-gradient-brand text-xs font-semibold text-black"
-                  >
-                    {testimonial.avatarInitials}
-                  </div>
-                ))}
-              </div>
-              <div className="flex items-center gap-1.5 text-sm">
-                <div className="flex text-accent-green" aria-hidden="true">
-                  {Array.from({ length: 5 }).map((_, index) => (
-                    <Star key={index} className="h-4 w-4 fill-accent-green" />
-                  ))}
-                </div>
-                <span className="font-semibold text-foreground">{AVERAGE_RATING}</span>
-                <span className="text-muted">average client rating</span>
-              </div>
-            </motion.div>
-
-            <motion.div variants={fadeInUp} className="flex flex-wrap gap-2 pt-6">
-              {PERSONAL.trustBadges.map((badge) => (
-                <Badge key={badge}>{badge}</Badge>
-              ))}
             </motion.div>
           </div>
 
@@ -116,10 +71,10 @@ function HeroGraphic() {
   return (
     <div className="relative">
       <div
-        className="absolute -inset-8 rounded-full bg-gradient-brand-soft blur-3xl"
+        className="absolute -inset-10 rounded-full bg-accent-green/10 blur-3xl"
         aria-hidden="true"
       />
-      <div className="glass glow-border relative rounded-2xl p-6 shadow-2xl">
+      <div className="glass relative rounded-[28px] p-6 shadow-2xl">
         <div className="flex items-center gap-2 border-b border-border pb-4">
           <span className="h-3 w-3 rounded-full bg-red-400/70" />
           <span className="h-3 w-3 rounded-full bg-yellow-400/70" />
@@ -132,7 +87,7 @@ function HeroGraphic() {
           <CodeLine indent={2} tokens={[{ t: "<Section", c: "text-accent-green-bright" }, { t: " optimised", c: "text-accent-green" }, { t: " />", c: "text-accent-green-bright" }]} />
           <CodeLine indent={1} tokens={[{ t: ")", c: "text-foreground" }]} />
           <CodeLine indent={0} tokens={[{ t: "}", c: "text-foreground" }]} />
-          <div className="mt-3 flex items-center gap-2 rounded-lg bg-surface-2 px-3 py-2">
+          <div className="mt-3 flex items-center gap-2 rounded-xl bg-white/[0.04] px-3 py-2">
             <span className="relative flex h-2 w-2" aria-hidden="true">
               <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-accent-green opacity-75" />
               <span className="relative inline-flex h-2 w-2 rounded-full bg-accent-green" />
@@ -141,20 +96,6 @@ function HeroGraphic() {
           </div>
         </div>
       </div>
-
-      <motion.div
-        animate={{ y: [0, -8, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-        className="glass glow-border absolute -bottom-8 -left-8 flex items-center gap-3 rounded-xl p-3 shadow-2xl sm:-left-10"
-      >
-        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-brand text-sm font-semibold text-black">
-          SS
-        </div>
-        <div>
-          <p className="text-sm font-semibold text-foreground">{PERSONAL.name}</p>
-          <p className="text-xs text-accent-green">100+ projects delivered</p>
-        </div>
-      </motion.div>
     </div>
   );
 }

@@ -12,7 +12,7 @@ export function GlassCard({ children, className, as = "div" }: GlassCardProps) {
   return (
     <Tag
       className={cn(
-        "glass glass-hover glow-border rounded-2xl p-6 sm:p-8",
+        "glass glass-hover glow-border rounded-[28px] p-6 sm:p-8",
         className,
       )}
     >

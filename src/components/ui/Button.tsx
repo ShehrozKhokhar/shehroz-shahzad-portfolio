@@ -12,15 +12,13 @@ interface BaseProps {
 }
 
 const variantClasses: Record<Variant, string> = {
-  primary:
-    "bg-gradient-brand text-black shadow-lg shadow-accent-green/20 hover:shadow-accent-green/40 hover:-translate-y-0.5",
-  secondary:
-    "glass glass-hover text-foreground hover:-translate-y-0.5",
+  primary: "glass-tint text-foreground hover:-translate-y-0.5",
+  secondary: "glass glass-hover text-foreground hover:-translate-y-0.5",
   ghost: "text-foreground hover:text-accent-green",
 };
 
 const baseClasses =
-  "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all duration-300";
+  "inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-medium transition-all duration-300";
 
 interface LinkButtonProps
   extends BaseProps,

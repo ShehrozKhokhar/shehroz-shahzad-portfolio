@@ -22,7 +22,7 @@ export function ProjectOrbitCard({
       rel="noopener noreferrer"
       style={{ backfaceVisibility: "hidden" }}
       className={cn(
-        "group glass glow-border relative block h-full w-full overflow-hidden rounded-2xl",
+        "group glass glow-border relative block h-full w-full overflow-hidden rounded-[28px]",
         className,
       )}
     >
@@ -38,7 +38,7 @@ export function ProjectOrbitCard({
         <PlaceholderImage
           label={`Add combined desktop + mobile screenshot: ${project.slug}.jpg`}
           aspect="square"
-          className="h-full w-full rounded-2xl border-0"
+          className="h-full w-full rounded-[28px] border-0"
         />
       )}
 

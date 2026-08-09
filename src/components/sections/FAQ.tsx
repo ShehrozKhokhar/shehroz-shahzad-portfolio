@@ -34,7 +34,7 @@ export function FAQ() {
         <div className="mx-auto mt-10 flex max-w-3xl flex-col gap-4">
           {FAQS.map((faq, index) => (
             <SlideUp key={faq.id} delay={index * 0.03}>
-              <details className="faq-item glass glass-hover rounded-2xl px-6 py-5">
+              <details className="faq-item glass glass-hover rounded-[24px] px-6 py-5">
                 <summary className="flex cursor-pointer items-center justify-between gap-4 font-display text-base font-semibold text-foreground sm:text-lg">
                   {faq.question}
                   <ChevronDown

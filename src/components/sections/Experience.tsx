@@ -28,7 +28,7 @@ export function Experience() {
                     <div className="glass glow-border relative z-10 flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full sm:h-12 sm:w-12">
                       <Icon className="h-5 w-5 text-accent-green" aria-hidden="true" />
                     </div>
-                    <div className="glass glass-hover flex-1 rounded-2xl p-5">
+                    <div className="glass glass-hover flex-1 rounded-[28px] p-5">
                       <div className="flex flex-wrap items-baseline justify-between gap-2">
                         <h3 className="font-display text-xl font-bold text-foreground">
                           {item.title}
