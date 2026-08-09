@@ -12,6 +12,7 @@ import { cn } from "@/utils/cn";
 const TOTAL = PROJECTS.length;
 const CARD_WIDTH = 220;
 const CARD_HEIGHT = 320;
+const STEP = 230;
 
 function getOffset(index: number, active: number) {
   let diff = index - active;
@@ -36,12 +37,12 @@ export function Projects() {
         />
       </Container>
 
-      <div className="relative mt-12 hidden h-[420px] items-center justify-center md:flex">
+      <div className="relative mt-12 hidden h-[400px] items-center justify-center md:flex">
         <button
           type="button"
           onClick={prev}
           aria-label="Previous project"
-          className="glass glass-hover absolute left-4 z-20 rounded-full p-3 text-foreground sm:left-10"
+          className="glass glass-hover absolute left-4 z-30 rounded-full p-3 text-foreground sm:left-10"
         >
           <ChevronLeft className="h-5 w-5" aria-hidden="true" />
         </button>
@@ -49,45 +50,47 @@ export function Projects() {
           type="button"
           onClick={next}
           aria-label="Next project"
-          className="glass glass-hover absolute right-4 z-20 rounded-full p-3 text-foreground sm:right-10"
+          className="glass glass-hover absolute right-4 z-30 rounded-full p-3 text-foreground sm:right-10"
         >
           <ChevronRight className="h-5 w-5" aria-hidden="true" />
         </button>
 
-        <div
-          className="relative h-full w-full overflow-hidden"
-          style={{ perspective: 1600 }}
-        >
-          {PROJECTS.map((project, index) => {
-            const offset = getOffset(index, activeIndex);
-            const distance = Math.abs(offset);
-            const isActive = offset === 0;
+        <div className="relative h-full w-full overflow-hidden">
+          <div className="absolute inset-0" style={{ perspective: 1600 }}>
+            {PROJECTS.map((project, index) => {
+              const offset = getOffset(index, activeIndex);
+              const distance = Math.abs(offset);
+              const isActive = offset === 0;
 
-            if (distance > 2) return null;
+              if (distance > 1) return null;
 
-            return (
-              <motion.div
-                key={project.id}
-                className="absolute left-1/2 top-1/2"
-                style={{ width: CARD_WIDTH, height: CARD_HEIGHT, zIndex: 10 - distance }}
-                animate={{
-                  x: `calc(-50% + ${offset * 200}px)`,
-                  y: "-50%",
-                  scale: isActive ? 1 : distance === 1 ? 0.82 : 0.64,
-                  opacity: isActive ? 1 : distance === 1 ? 0.55 : 0.22,
-                  rotateY: offset * -22,
-                }}
-                transition={{ type: "spring", stiffness: 260, damping: 30 }}
-              >
-                <div
-                  className={cn(!isActive && "pointer-events-none")}
-                  onClick={() => !isActive && setActiveIndex(index)}
+              return (
+                <motion.div
+                  key={project.id}
+                  className="absolute left-1/2 top-1/2"
+                  style={{ width: CARD_WIDTH, height: CARD_HEIGHT, zIndex: 10 - distance }}
+                  animate={{
+                    x: `calc(-50% + ${offset * STEP}px)`,
+                    y: "-50%",
+                    scale: isActive ? 1 : 0.8,
+                    opacity: isActive ? 1 : 0.45,
+                    rotateY: offset * -24,
+                  }}
+                  transition={{ type: "spring", stiffness: 260, damping: 30 }}
                 >
-                  <ProjectOrbitCard project={project} />
-                </div>
-              </motion.div>
-            );
-          })}
+                  <div
+                    className={cn("h-full w-full", !isActive && "pointer-events-none")}
+                    onClick={() => !isActive && setActiveIndex(index)}
+                  >
+                    <ProjectOrbitCard project={project} />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+
+          <div className="pointer-events-none absolute inset-y-0 left-0 z-20 w-24 bg-gradient-to-r from-background to-transparent" />
+          <div className="pointer-events-none absolute inset-y-0 right-0 z-20 w-24 bg-gradient-to-l from-background to-transparent" />
         </div>
       </div>
 
