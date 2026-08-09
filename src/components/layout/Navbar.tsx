@@ -19,13 +19,13 @@ export function Navbar() {
   const closeMobileMenu = () => setIsMobileOpen(false);
 
   return (
-    <header
-      className={cn(
-        "fixed inset-x-0 top-0 z-40 transition-all duration-300",
-        isScrolled ? "glass border-b border-border" : "bg-transparent",
-      )}
-    >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-8 lg:px-12">
+    <header className="fixed inset-x-0 top-4 z-40 px-4 sm:px-6">
+      <div
+        className={cn(
+          "glass mx-auto flex max-w-5xl items-center justify-between rounded-full px-5 py-3 transition-shadow duration-300 sm:px-6",
+          isScrolled && "shadow-2xl",
+        )}
+      >
         <Link href="#home" className="font-display text-lg font-semibold text-foreground">
           {PERSONAL.name}
         </Link>
@@ -63,23 +63,23 @@ export function Navbar() {
 
         <button
           type="button"
-          className="glass rounded-lg p-2 text-foreground md:hidden"
+          className="glass rounded-full p-2 text-foreground md:hidden"
           aria-label={isMobileOpen ? "Close menu" : "Open menu"}
           aria-expanded={isMobileOpen}
           onClick={() => setIsMobileOpen((open) => !open)}
         >
           {isMobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
-      </nav>
+      </div>
 
       <AnimatePresence>
         {isMobileOpen ? (
           <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
             transition={{ duration: 0.25, ease: "easeOut" }}
-            className="glass overflow-hidden border-t border-border md:hidden"
+            className="glass mx-auto mt-2 max-w-5xl overflow-hidden rounded-[28px] md:hidden"
           >
             <ul className="flex flex-col gap-1 px-6 py-4">
               {NAV_LINKS.map((link) => (
@@ -88,7 +88,7 @@ export function Navbar() {
                     href={link.href}
                     onClick={closeMobileMenu}
                     className={cn(
-                      "block rounded-lg px-3 py-3 text-sm font-medium transition-colors",
+                      "block rounded-xl px-3 py-3 text-sm font-medium transition-colors",
                       activeId === link.sectionId
                         ? "text-accent-green"
                         : "text-muted hover:text-foreground",
