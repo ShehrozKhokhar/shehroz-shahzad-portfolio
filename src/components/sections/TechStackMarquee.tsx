@@ -3,7 +3,7 @@ import { cn } from "@/utils/cn";
 
 export function TechStackMarquee() {
   return (
-    <section className="border-y border-border py-10" aria-label="Tools and technologies I use">
+    <section className="py-6" aria-label="Tools and technologies I use">
       <div className="relative flex flex-col gap-4 overflow-hidden">
         <MarqueeRow items={STACK_ROW} direction="left" />
         <MarqueeRow items={TOOLS_ROW} direction="right" />

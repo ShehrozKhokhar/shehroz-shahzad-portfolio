@@ -6,7 +6,7 @@ export function LogoMarquee() {
   const track = [...CLIENT_LOGOS, ...CLIENT_LOGOS];
 
   return (
-    <section className="border-y border-border py-10" aria-label="Client stores built">
+    <section className="py-6" aria-label="Client stores built">
       <Container>
         <p className="mb-6 text-center text-xs font-semibold uppercase tracking-widest text-muted">
           Real Shopify stores built &amp; shipped

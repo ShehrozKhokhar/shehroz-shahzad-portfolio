@@ -15,7 +15,7 @@ export function Hero() {
   return (
     <section
       id="home"
-      className="relative flex min-h-screen items-center overflow-hidden pt-28 pb-16"
+      className="relative flex items-center overflow-hidden pt-32 pb-16"
     >
       <div className="bg-gradient-glow absolute inset-0" aria-hidden="true" />
       <Hero3DBackground />
