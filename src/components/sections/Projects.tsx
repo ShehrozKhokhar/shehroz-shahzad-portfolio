@@ -39,6 +39,23 @@ export function Projects() {
         />
       </Container>
 
+      <div className="mt-10 overflow-hidden border-y border-border py-3" aria-hidden="true">
+        <div className="animate-marquee flex w-max items-center gap-10 [animation-duration:24s]">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <span
+              key={i}
+              className="flex items-center gap-10 font-display text-2xl font-semibold uppercase tracking-wide text-transparent sm:text-3xl"
+              style={{ WebkitTextStroke: "1px var(--color-border)" }}
+            >
+              Featured Projects
+              <span className="text-accent-green" style={{ WebkitTextStroke: "0" }}>
+                ✦
+              </span>
+            </span>
+          ))}
+        </div>
+      </div>
+
       <div ref={trackRef} className="relative mt-8 hidden md:block" style={{ height: `${total * 32}vh` }}>
         <div className="sticky top-0 flex h-screen flex-col items-center justify-center overflow-hidden">
           <div

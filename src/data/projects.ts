@@ -16,7 +16,7 @@ export const PROJECTS: Project[] = [
     ],
     techStack: ["Shopify", "Liquid", "Online Store 2.0"],
     liveUrl: "https://www.theoutdoorlook.co.uk/",
-    image: null,
+    image: "/projects/composite-the-outdoor-look.jpg",
   },
   {
     id: "mida-living",
@@ -33,7 +33,7 @@ export const PROJECTS: Project[] = [
     ],
     techStack: ["Shopify", "Liquid", "Online Store 2.0"],
     liveUrl: "https://midaliving.com/",
-    image: null,
+    image: "/projects/composite-mida-living.jpg",
   },
   {
     id: "aq-beds",
@@ -50,7 +50,7 @@ export const PROJECTS: Project[] = [
     ],
     techStack: ["Shopify", "Liquid", "Online Store 2.0"],
     liveUrl: "https://aqbeds.co.uk/",
-    image: null,
+    image: "/projects/composite-aq-beds.jpg",
   },
   {
     id: "bonanza-sleep",
@@ -67,7 +67,7 @@ export const PROJECTS: Project[] = [
     ],
     techStack: ["Shopify", "Liquid", "Online Store 2.0"],
     liveUrl: "https://bonanzasleep.co.uk/",
-    image: null,
+    image: "/projects/composite-bonanza-sleep.jpg",
   },
   {
     id: "premmier-sleeps",
@@ -84,6 +84,6 @@ export const PROJECTS: Project[] = [
     ],
     techStack: ["Shopify", "Liquid", "Online Store 2.0"],
     liveUrl: "https://premmiersleeps.co.uk/",
-    image: null,
+    image: "/projects/composite-premmier-sleeps.jpg",
   },
 ];

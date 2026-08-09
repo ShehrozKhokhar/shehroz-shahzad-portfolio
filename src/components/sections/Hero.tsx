@@ -7,7 +7,10 @@ import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
 import { FloatingParticles } from "@/components/animations/FloatingParticles";
+import { TypewriterWords } from "@/components/animations/TypewriterWords";
 import { staggerContainer, fadeInUp } from "@/constants/animations";
+
+const BUILDING_WORDS = ["Shopify stores", "Next.js apps", "landing pages", "checkout flows"];
 
 export function Hero() {
   return (
@@ -35,6 +38,15 @@ export function Hero() {
                 Available for freelance &amp; contract work
               </Badge>
             </motion.div>
+
+            <motion.p
+              variants={fadeInUp}
+              className="font-mono text-sm text-muted"
+              aria-hidden="true"
+            >
+              <span className="text-accent-green">$</span> currently building:{" "}
+              <TypewriterWords words={BUILDING_WORDS} className="text-accent-green-bright" />
+            </motion.p>
 
             <motion.h1
               variants={fadeInUp}
@@ -102,6 +114,20 @@ function HeroGraphic() {
           </div>
         </div>
       </div>
+
+      <motion.div
+        animate={{ y: [0, -8, 0] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        className="glass glow-border absolute -bottom-8 -left-8 flex items-center gap-3 rounded-xl p-3 shadow-2xl sm:-left-10"
+      >
+        <div className="flex h-11 w-11 items-center justify-center rounded-full bg-gradient-brand text-sm font-semibold text-black">
+          SS
+        </div>
+        <div>
+          <p className="text-sm font-semibold text-foreground">{PERSONAL.name}</p>
+          <p className="text-xs text-accent-green">100+ projects delivered</p>
+        </div>
+      </motion.div>
     </div>
   );
 }
