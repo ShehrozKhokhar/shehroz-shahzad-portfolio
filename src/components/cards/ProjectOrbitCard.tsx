@@ -55,7 +55,7 @@ export function ProjectOrbitCard({
         <span className="text-xs font-semibold uppercase tracking-widest text-accent-green">
           {project.category}
         </span>
-        <h3 className="font-display text-lg font-semibold text-white">{project.title}</h3>
+        <h3 className="font-display text-xl font-bold text-white">{project.title}</h3>
         <p
           className={cn(
             "text-sm text-white/80 transition-opacity duration-300",

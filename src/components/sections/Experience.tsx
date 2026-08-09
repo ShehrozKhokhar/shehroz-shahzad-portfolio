@@ -30,7 +30,7 @@ export function Experience() {
                     </div>
                     <div className="glass glass-hover flex-1 rounded-2xl p-5">
                       <div className="flex flex-wrap items-baseline justify-between gap-2">
-                        <h3 className="font-display text-lg font-semibold text-foreground">
+                        <h3 className="font-display text-xl font-bold text-foreground">
                           {item.title}
                         </h3>
                         <span className="text-xs font-medium uppercase tracking-widest text-accent-green">

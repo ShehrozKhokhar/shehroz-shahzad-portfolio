@@ -3,6 +3,8 @@ import { Geist, Geist_Mono, Space_Grotesk } from "next/font/google";
 import { MotionConfig } from "framer-motion";
 import { SITE_CONFIG } from "@/constants/site";
 import { PERSONAL, SOCIAL_LINKS } from "@/data/personal";
+import { SERVICES } from "@/data/services";
+import { TESTIMONIALS } from "@/data/testimonials";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollProgress } from "@/components/layout/ScrollProgress";
@@ -57,6 +59,10 @@ export const metadata: Metadata = {
   },
 };
 
+const averageRating = (
+  TESTIMONIALS.reduce((sum, testimonial) => sum + testimonial.rating, 0) / TESTIMONIALS.length
+).toFixed(1);
+
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
@@ -65,6 +71,7 @@ const jsonLd = {
       name: PERSONAL.name,
       jobTitle: PERSONAL.role,
       url: SITE_CONFIG.url,
+      knowsAbout: [...SITE_CONFIG.keywords],
       sameAs: SOCIAL_LINKS.filter((link) => link.href.startsWith("http")).map(
         (link) => link.href,
       ),
@@ -74,6 +81,27 @@ const jsonLd = {
       url: SITE_CONFIG.url,
       name: SITE_CONFIG.name,
       description: SITE_CONFIG.description,
+    },
+    {
+      "@type": "ProfessionalService",
+      name: `${PERSONAL.name} — Shopify Development`,
+      url: SITE_CONFIG.url,
+      description: SITE_CONFIG.description,
+      areaServed: "Worldwide",
+      priceRange: "$$",
+      aggregateRating: {
+        "@type": "AggregateRating",
+        ratingValue: averageRating,
+        reviewCount: TESTIMONIALS.length,
+      },
+      makesOffer: SERVICES.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: service.title,
+          description: service.description,
+        },
+      })),
     },
   ],
 };

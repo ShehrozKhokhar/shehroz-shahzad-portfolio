@@ -10,8 +10,8 @@ export function Skills() {
       <Container>
         <SectionHeading
           eyebrow="Skills"
-          title="A modern, full stack toolkit"
-          description="From Shopify Liquid to Next.js and performance tooling — the technologies I use to ship reliable, fast products."
+          title="Shopify & Next.js skills"
+          description="From Shopify Liquid and Shopify Functions to Next.js, TypeScript, and performance tooling — the technologies I use to ship reliable, fast products."
         />
 
         <StaggerGroup className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">

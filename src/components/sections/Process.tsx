@@ -28,7 +28,7 @@ export function Process() {
                       {String(step.step).padStart(2, "0")}
                     </span>
                   </div>
-                  <h3 className="font-display text-lg font-semibold text-foreground">
+                  <h3 className="font-display text-xl font-bold text-foreground">
                     {step.title}
                   </h3>
                   <p className="text-sm text-muted">{step.description}</p>

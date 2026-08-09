@@ -1,8 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Star } from "lucide-react";
 import { PERSONAL } from "@/data/personal";
+import { TESTIMONIALS } from "@/data/testimonials";
 import { Container } from "@/components/ui/Container";
 import { Badge } from "@/components/ui/Badge";
 import { Button } from "@/components/ui/Button";
@@ -11,6 +12,10 @@ import { TypewriterWords } from "@/components/animations/TypewriterWords";
 import { staggerContainer, fadeInUp } from "@/constants/animations";
 
 const BUILDING_WORDS = ["Shopify stores", "Next.js apps", "landing pages", "checkout flows"];
+
+const AVERAGE_RATING = (
+  TESTIMONIALS.reduce((sum, testimonial) => sum + testimonial.rating, 0) / TESTIMONIALS.length
+).toFixed(1);
 
 export function Hero() {
   return (
@@ -50,7 +55,7 @@ export function Hero() {
 
             <motion.h1
               variants={fadeInUp}
-              className="font-display text-4xl font-semibold leading-tight tracking-tight text-foreground sm:text-5xl lg:text-6xl"
+              className="font-display text-5xl font-bold leading-[1.05] tracking-tight text-foreground sm:text-6xl lg:text-7xl"
             >
               <HighlightedHeadline text={PERSONAL.headline} highlight={PERSONAL.headlineHighlight} />
             </motion.h1>
@@ -67,6 +72,28 @@ export function Hero() {
               <Button href="#projects" variant="secondary">
                 View My Work
               </Button>
+            </motion.div>
+
+            <motion.div variants={fadeInUp} className="flex flex-wrap items-center gap-4 pt-2">
+              <div className="flex -space-x-2.5" aria-hidden="true">
+                {TESTIMONIALS.slice(0, 4).map((testimonial) => (
+                  <div
+                    key={testimonial.id}
+                    className="flex h-9 w-9 items-center justify-center rounded-full border-2 border-background bg-gradient-brand text-xs font-semibold text-black"
+                  >
+                    {testimonial.avatarInitials}
+                  </div>
+                ))}
+              </div>
+              <div className="flex items-center gap-1.5 text-sm">
+                <div className="flex text-accent-green" aria-hidden="true">
+                  {Array.from({ length: 5 }).map((_, index) => (
+                    <Star key={index} className="h-4 w-4 fill-accent-green" />
+                  ))}
+                </div>
+                <span className="font-semibold text-foreground">{AVERAGE_RATING}</span>
+                <span className="text-muted">average client rating</span>
+              </div>
             </motion.div>
 
             <motion.div variants={fadeInUp} className="flex flex-wrap gap-2 pt-6">

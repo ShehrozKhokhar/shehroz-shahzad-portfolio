@@ -10,11 +10,11 @@ export function Services() {
       <Container>
         <SectionHeading
           eyebrow="Services"
-          title="How I can help"
-          description="From a brand-new Shopify build to performance-critical fixes on an existing app, here's where I add the most value."
+          title="Shopify development services"
+          description="From a brand-new Shopify store to Shopify Functions, migrations, and Next.js web apps — here's where I add the most value as a freelance Shopify developer."
         />
 
-        <StaggerGroup className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <StaggerGroup className="mt-10 flex flex-col gap-6">
           {SERVICES.map((service) => (
             <StaggerItem key={service.id}>
               <ServiceCard service={service} />

@@ -196,6 +196,22 @@ body {
   .typewriter-cursor {
     animation: blink 1s step-end infinite;
   }
+
+  .faq-item > summary {
+    list-style: none;
+  }
+
+  .faq-item > summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq-chevron {
+    transition: transform 0.3s ease;
+  }
+
+  .faq-item[open] .faq-chevron {
+    transform: rotate(180deg);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

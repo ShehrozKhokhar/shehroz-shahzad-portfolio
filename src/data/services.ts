@@ -1,102 +1,75 @@
-import {
-  ShoppingBag,
-  Paintbrush,
-  Zap,
-  Puzzle,
-  LayoutTemplate,
-  Rocket,
-  Search,
-  ArrowRightLeft,
-  Bug,
-  Wrench,
-  Globe,
-  Plug,
-} from "lucide-react";
+import { ShoppingBag, Zap, Rocket, LifeBuoy, Globe } from "lucide-react";
 import type { Service } from "@/types";
 
 export const SERVICES: Service[] = [
   {
-    id: "custom-shopify-store",
-    title: "Custom Shopify Store Development",
+    id: "shopify-store-development",
+    number: "01",
+    title: "Shopify Store Development",
     description:
-      "End-to-end Shopify stores built from scratch — architecture, theme, and integrations tailored to your brand and sales flow.",
+      "Custom Shopify stores built from scratch, or existing themes rebuilt for a brand that's outgrown its template.",
+    features: [
+      "Custom theme design & development",
+      "Theme customisation & Online Store 2.0 sections",
+      "Platform-to-Shopify migration",
+      "Shopify CLI & Liquid architecture",
+    ],
     icon: ShoppingBag,
   },
   {
-    id: "theme-customisation",
-    title: "Shopify Theme Customisation",
+    id: "shopify-functions-integrations",
+    number: "02",
+    title: "Shopify Functions & App Integrations",
     description:
-      "Deep customisation of existing themes: layout changes, custom sections, and pixel-perfect design implementation.",
-    icon: Paintbrush,
-  },
-  {
-    id: "shopify-functions",
-    title: "Shopify Functions Development",
-    description:
-      "Custom discount, shipping, and checkout logic built with Shopify Functions for advanced merchandising rules.",
+      "Merchandising and checkout logic Shopify can't do natively, plus integrations that connect your store to the rest of your stack.",
+    features: [
+      "Custom Shopify Functions (discounts, shipping, checkout)",
+      "Third-party & custom app integration",
+      "Storefront and Admin API development",
+      "Payment, CRM, and ERP API integration",
+    ],
     icon: Zap,
   },
   {
-    id: "app-integration",
-    title: "Shopify App Integration",
+    id: "performance-seo",
+    number: "03",
+    title: "Performance & SEO Optimisation",
     description:
-      "Seamless integration of third-party and custom apps, connecting Shopify to your wider tooling and workflows.",
-    icon: Puzzle,
-  },
-  {
-    id: "custom-sections",
-    title: "Custom Shopify Sections",
-    description:
-      "Reusable, merchant-friendly custom sections and blocks built with the Shopify Online Store 2.0 architecture.",
-    icon: LayoutTemplate,
-  },
-  {
-    id: "speed-optimisation",
-    title: "Shopify Speed Optimisation",
-    description:
-      "Audits and fixes targeting Core Web Vitals — faster load times that improve conversion and search ranking.",
+      "Audits and fixes that target Core Web Vitals and search visibility — faster stores that rank and convert better.",
+    features: [
+      "Core Web Vitals audits & fixes",
+      "Technical & on-page SEO",
+      "Image and script optimisation",
+      "Structured data & metadata",
+    ],
     icon: Rocket,
   },
   {
-    id: "seo-optimisation",
-    title: "SEO Optimisation",
-    description:
-      "Technical and on-page SEO improvements to help your store and content rank and convert organic traffic.",
-    icon: Search,
-  },
-  {
-    id: "shopify-migration",
-    title: "Shopify Migration",
-    description:
-      "Safe, structured migrations from other platforms to Shopify, or between Shopify themes, without losing data or SEO equity.",
-    icon: ArrowRightLeft,
-  },
-  {
-    id: "bug-fixes",
-    title: "Bug Fixes",
-    description:
-      "Fast, targeted fixes for broken layouts, checkout issues, script conflicts, and other store-breaking bugs.",
-    icon: Bug,
-  },
-  {
-    id: "store-maintenance",
-    title: "Ongoing Store Maintenance",
-    description:
-      "Retainer-based support to keep your store updated, monitored, and running smoothly after launch.",
-    icon: Wrench,
-  },
-  {
-    id: "nextjs-apps",
+    id: "nextjs-applications",
+    number: "04",
     title: "Next.js Web Applications",
     description:
-      "Custom web applications and marketing sites built with Next.js, TypeScript, and modern tooling.",
+      "Full stack web applications and marketing sites built with Next.js, TypeScript, and modern tooling beyond Shopify.",
+    features: [
+      "Custom web apps & landing pages",
+      "TypeScript & React development",
+      "API integration & authentication",
+      "Vercel deployment & CI/CD",
+    ],
     icon: Globe,
   },
   {
-    id: "api-integration",
-    title: "API Integration",
+    id: "ongoing-support",
+    number: "05",
+    title: "Ongoing Support & Maintenance",
     description:
-      "Connecting your storefront or application to payment providers, CRMs, ERPs, and other third-party APIs.",
-    icon: Plug,
+      "Retainer-based support to keep your store or app updated, monitored, and running smoothly long after launch.",
+    features: [
+      "Bug fixes & store-breaking issue triage",
+      "Ongoing monitoring & updates",
+      "Priority support for active clients",
+      "Small feature requests & iteration",
+    ],
+    icon: LifeBuoy,
   },
 ];

@@ -2,22 +2,29 @@ import { Mail } from "lucide-react";
 import { SOCIAL_LINKS } from "@/data/personal";
 import { SITE_CONFIG } from "@/constants/site";
 import { Container } from "@/components/ui/Container";
-import { SectionHeading } from "@/components/ui/SectionHeading";
+import { Badge } from "@/components/ui/Badge";
 import { GlassCard } from "@/components/ui/GlassCard";
 import { ContactForm } from "@/components/forms/ContactForm";
 import { SlideUp } from "@/components/animations/SlideUp";
 
 export function Contact() {
   return (
-    <section id="contact" className="py-16 sm:py-20">
-      <Container>
-        <SectionHeading
-          eyebrow="Contact"
-          title="Let's build something great"
-          description="Tell me about your project and I'll get back to you within one business day."
-        />
+    <section id="contact" className="relative overflow-hidden py-20 sm:py-28">
+      <div className="bg-gradient-glow absolute inset-0" aria-hidden="true" />
 
-        <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-5">
+      <Container className="relative z-10">
+        <SlideUp className="flex flex-col items-center gap-5 text-center">
+          <Badge>Contact</Badge>
+          <h2 className="font-display text-5xl font-bold tracking-tight text-foreground sm:text-6xl md:text-7xl">
+            Let&apos;s build something <span className="text-gradient">great</span> together
+          </h2>
+          <p className="max-w-xl text-base text-muted sm:text-lg">
+            Have a Shopify store or web app in mind? Tell me about your project and I&apos;ll get
+            back to you within one business day.
+          </p>
+        </SlideUp>
+
+        <div className="mt-14 grid grid-cols-1 gap-8 lg:grid-cols-5">
           <SlideUp className="lg:col-span-2">
             <GlassCard className="flex h-full flex-col gap-6">
               <div>
